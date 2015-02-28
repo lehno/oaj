@@ -10,6 +10,15 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$locatio
 	}
 ]);
 
+angular.module(ApplicationConfiguration.applicationModuleName).config(['$mdThemingProvider',
+	function($mdThemingProvider) {
+		$mdThemingProvider.theme('default')
+			.primaryPalette('grey')
+			.accentPalette('blue-grey');
+	}
+]);
+
+
 //Then define the init function for starting up the application
 angular.element(document).ready(function() {
 	//Fixing facebook bug with redirect
