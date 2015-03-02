@@ -1,18 +1,26 @@
 'use strict';
 
-angular.module('core').controller('HeaderController', ['$scope', 'Authentication', 'Menus',
-	function($scope, Authentication, Menus) {
+angular.module('core').controller('HeaderController', ['$scope', 'Authentication','$mdDialog','$mdSidenav',
+	function($scope, Authentication,$mdDialog,$mdSidenav) {
 		$scope.authentication = Authentication;
-		$scope.isCollapsed = false;
-		$scope.menu = Menus.getMenu('topbar');
 
-		$scope.toggleCollapsibleMenu = function() {
-			$scope.isCollapsed = !$scope.isCollapsed;
-		};
+        $scope.showSignIn = function (ev) {
+            $mdDialog.show({
+                controller: 'AuthenticationController',
+                templateUrl: 'modules/users/views/authentication/login.client.view.html',
+                targetEvent: ev
+            });
+        };
+        $scope.showSignUp = function (ev) {
+            $mdDialog.show({
+                controller: 'AuthenticationController',
+                templateUrl: 'modules/users/views/authentication/signup.client.view.html',
+                targetEvent: ev
+            });
+        };
 
-		// Collapsing the menu after navigation
-		$scope.$on('$stateChangeSuccess', function() {
-			$scope.isCollapsed = false;
-		});
+        $scope.toggleLeft = function () {
+            $mdSidenav('left').toggle();
+        };
 	}
 ]);

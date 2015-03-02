@@ -1,0 +1,14 @@
+<section data-ng-controller="SheetsController">
+    <md-tabs class="md-accent" md-selected="data.selectedIndex">
+        <md-tab id="tab1" aria-controls="tab1-content">
+            Item One
+        </md-tab>
+        <md-tab id="tab2" aria-controls="tab2-content"
+                ng-disabled="data.secondLocked">
+            {{data.secondLabel}}
+        </md-tab>
+        <md-tab id="tab3" aria-controls="tab3-content">
+            Item Three
+        </md-tab>
+    </md-tabs>
+</section>

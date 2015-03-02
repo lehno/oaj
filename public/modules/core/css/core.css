@@ -18,17 +18,24 @@
     display: block;
 }
 
-.content{
+.content {
     height: 100%;
 }
 
-.logo{
-    background: url("/modules/core/img/brand/OAJ6.png") center no-repeat #101010;
+.logo {
+    background: url("/modules/core/img/brand/OAJ6.png") center no-repeat #ffffff;
     background-size: 30%;
     width: 100%;
     height: 100%;
+    color: rgb(255,215,64);
 }
 
 .left {
     float: left;
+}
+
+.fixed{
+    position: fixed;
+    width: 100%;
+    top: 0;
 }
