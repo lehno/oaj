@@ -3,9 +3,15 @@
 angular.module('users').controller('AuthenticationController', ['$scope', '$http', '$location', 'Authentication','$mdDialog',
 	function($scope, $http, $location, Authentication,$mdDialog) {
 		$scope.authentication = Authentication;
-		$scope.instruments = ['Piano', 'Violino', 'Violoncelo', 'Violão','Sax Alto', 'Sax Tenor', 'Trompete','Trombone','Trombone de Vara','Tuba', 'Trompa','Percussão','Viola','Clarinete','Flauta Transversal','Flauta Doce','Flauta Contralto','Contrabaixo Acustico'];
 		// If user is signed in then redirect back home
 		if ($scope.authentication.user) $location.path('/');
+
+        $scope.instruments = [];
+        $scope.loadInstruments = function() {
+            return $http.get('/api/instrumentos').success(function(data){
+                $scope.instruments = data;
+            });
+        };
 
 		$scope.signup = function() {
 			$http.post('/auth/signup', $scope.credentials).success(function(response) {

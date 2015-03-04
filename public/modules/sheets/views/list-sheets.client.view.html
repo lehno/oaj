@@ -1,14 +1,33 @@
-<section data-ng-controller="SheetsController">
-    <md-tabs class="md-accent" md-selected="data.selectedIndex">
-        <md-tab id="tab1" aria-controls="tab1-content">
-            Item One
-        </md-tab>
-        <md-tab id="tab2" aria-controls="tab2-content"
-                ng-disabled="data.secondLocked">
-            {{data.secondLabel}}
-        </md-tab>
-        <md-tab id="tab3" aria-controls="tab3-content">
-            Item Three
+<section data-ng-controller="SheetsController" class="sample" layout="column" data-ng-init="find()">
+    <md-tabs class="md-primary" flex md-selected="selectedIndex">
+        <md-tab ng-repeat="instrumento in instrumentos" label="{{instrumento.name}}">
+            <div class="tab-content tab{{$index%4}}" layout="column" layout-align="space-around center" layout-margin
+                 layout-padding>
+                <md-toolbar class="md-accent md-hue-3">
+                    <div class="md-toolbar-tools">
+                        <span class="md-flex">Músicas para {{instrumentos[selectedIndex].name}}</span>
+                    </div>
+                </md-toolbar>
+                <md-whiteframe class="md-whiteframe-z1" layout-fill layout-align="center center" layout-padding>
+                    <md-input-container>
+                        <label>Pesquisar música</label>
+                        <input ng-model="query">
+                    </md-input-container>
+                    <md-list>
+                        <md-item ng-repeat="item in instrumentos | filter:query">
+                            <md-item-content>
+                                <div class="md-tile-content">
+                                    <h3>{{item.name}}</h3>
+                                    <h4>{{item.created}}</h4>
+                                    <p>
+                                        {{item.name}}
+                                    </p>
+                                </div>
+                            </md-item-content>
+                        </md-item>
+                    </md-list>
+                </md-whiteframe>
+            </div>
         </md-tab>
     </md-tabs>
 </section>

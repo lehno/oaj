@@ -1,11 +1,9 @@
-<section class="fixed" data-ng-controller="HeaderController">
-    <header ng-show="authentication.user">
-        <md-toolbar scroll-shrink layout="row">
-            <div class="md-toolbar-tools">
-                <md-button class="md-accent md-raised" ng-click="toggleLeft()">Menu</md-button>
-            </div>
-        </md-toolbar>
-    </header>
+<section data-ng-controller="HeaderController">
+    <md-toolbar scroll-shrink layout="row" ng-show="authentication.user">
+        <div class="md-toolbar-tools">
+            <md-button class="md-accent md-raised" ng-click="toggleLeft()">Menu</md-button>
+        </div>
+    </md-toolbar>
     <section layout="row" layout-align="end center" layout-padding ng-show="!authentication.user">
         <div layout-align="space-around center">
             <md-button class="md-primary md-raised" ng-click="showSignIn($event)">Login</md-button>

@@ -43,11 +43,10 @@ var UserSchema = new Schema({
 		default: '',
 		validate: [validateLocalStrategyPassword, 'Senha precisa ser maior']
 	},
-	instrument: {
-		type: String,
-		default: '',
-		validate: [validateLocalStrategyProperty, 'Insira seu instrumento']
-	},
+    instrument: {
+        type: Schema.ObjectId,
+        ref: 'Instrumento'
+    },
 	salt: {
 		type: String
 	},

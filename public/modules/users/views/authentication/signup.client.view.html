@@ -7,9 +7,9 @@
             <input type="text" required id="name" name="name"
                    data-ng-model="credentials.name">
         </md-input-container>
-        <md-select layout-align="start center" ng-model="credentials.instrument"
+        <md-select layout-align="start center" ng-model="credentials.instrument" md-on-open="loadInstruments()"
                    placeholder="Instrumento">
-            <md-option ng-value="opt" ng-repeat="opt in instruments | orderBy:opt">{{ opt }}</md-option>
+            <md-option ng-value="opt" ng-repeat="opt in instruments | orderBy:opt.name">{{ opt.name }}</md-option>
         </md-select>
         <md-input-container>
             <label for="email">Email</label>

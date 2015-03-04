@@ -23,8 +23,8 @@
 }
 
 .logo {
-    background: url("/modules/core/img/brand/OAJ6.png") center no-repeat #ffffff;
-    background-size: 30%;
+    background: url("/modules/core/img/brand/OAJ6.png") center no-repeat #ffffff ;
+    background-size: contain;
     width: 100%;
     height: 100%;
     color: rgb(255,215,64);
