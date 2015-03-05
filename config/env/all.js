@@ -52,7 +52,8 @@ module.exports = {
 				'public/lib/angular-animate/angular-animate.js',
 				'public/lib/angular-ui-router/release/angular-ui-router.js',
 				'public/lib/angular-ui-utils/ui-utils.js',
-				'public/lib/angular-material/angular-material.js'
+				'public/lib/angular-material/angular-material.js',
+				'public/lib/ng-file-upload/angular-file-upload.min.js'
 			]
 		},
 		css: [

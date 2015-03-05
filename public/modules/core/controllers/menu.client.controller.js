@@ -18,6 +18,6 @@ angular.module('core').controller('MenuController', ['$scope', 'Authentication',
             } else {
                 return false;
             }
-        }
+        };
 	}
 ]);

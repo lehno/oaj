@@ -1,14 +1,14 @@
 'use strict';
 
-//Articles service used for communicating with the articles REST endpoints
+//Sheets service used to communicate Sheets REST endpoints
 angular.module('sheets').factory('Sheets', ['$resource',
-	function($resource) {
-		return $resource('api/sheets/:sheetId', {
-			articleId: '@_id'
-		}, {
-			update: {
-				method: 'PUT'
-			}
-		});
-	}
+    function ($resource) {
+        return $resource('api/sheets/:sheetId', {
+            sheetId: '@_id'
+        }, {
+            update: {
+                method: 'PUT'
+            }
+        });
+    }
 ]);

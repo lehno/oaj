@@ -8,7 +8,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 
         $scope.instruments = [];
         $scope.loadInstruments = function() {
-            return $http.get('/api/instrumentos').success(function(data){
+            return $http.get('/api/instruments').success(function(data){
                 $scope.instruments = data;
             });
         };

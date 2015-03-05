@@ -8,7 +8,7 @@ var _ = require('lodash'),
     mongoose = require('mongoose'),
     passport = require('passport'),
     User = mongoose.model('User'),
-    Instrumento = mongoose.model('Instrumento');
+    Instrument = mongoose.model('Instrument');
 
 /**
  * Signup
@@ -23,30 +23,47 @@ exports.signup = function (req, res) {
 
     // Add missing user fields
     user.provider = 'local';
-    Instrumento.findById(req.body.instrument._id, function (err, instrument) {
-        if (err) {
-            res.status(400).send(err);
-        } else {
-            user.instrument = instrument.id;
-            user.save(function (err) {
-                if (err) {
-                    return res.status(400).send({
-                        message: errorHandler.getErrorMessage(err)
-                    });
-                } else {
-                    user.password = undefined;
-                    user.salt = undefined;
-                    req.login(user, function (err) {
-                        if (err) {
-                            res.status(400).send(err);
-                        } else {
-                            res.json(user);
-                        }
-                    });
-                }
-            });
+    if (req.body.instrument) {
+        if (mongoose.Types.ObjectId.isValid(req.body.instrument._id)){
+            user.instrument = mongoose.Types.ObjectId.fromString(req.body.instrument._id);
         }
-    });
+        user.save(function (err) {
+            if (err) {
+                return res.status(400).send({
+                    message: errorHandler.getErrorMessage(err)
+                });
+            } else {
+                user.password = undefined;
+                user.salt = undefined;
+                req.login(user, function (err) {
+                    if (err) {
+                        res.status(400).send(err);
+                    } else {
+                        res.json(user);
+                    }
+                });
+            }
+        });
+    } else {
+        user.save(function (err) {
+            if (err) {
+                return res.status(400).send({
+                    message: errorHandler.getErrorMessage(err)
+                });
+            } else {
+                user.password = undefined;
+                user.salt = undefined;
+                req.login(user, function (err) {
+                    if (err) {
+                        res.status(400).send(err);
+                    } else {
+                        res.json(user);
+                    }
+                });
+            }
+        });
+    }
+
 };
 
 /**

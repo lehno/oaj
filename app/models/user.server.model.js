@@ -45,7 +45,7 @@ var UserSchema = new Schema({
 	},
     instrument: {
         type: Schema.ObjectId,
-        ref: 'Instrumento'
+        ref: 'Instrument'
     },
 	salt: {
 		type: String
