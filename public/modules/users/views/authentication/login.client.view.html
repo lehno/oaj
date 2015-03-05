@@ -1,0 +1,16 @@
+<md-dialog aria-label="Login">
+    <form data-ng-submit="signin()" autocomplete="off" novalidate name="userForm" layout-margin layout-padding
+          layout="column"
+          layout-align="center center">
+        <md-input-container class="md-primary">
+            <label>E-mail</label>
+            <input required type="email" name="email" data-ng-model="credentials.email">
+        </md-input-container>
+        <md-input-container class="md-primary">
+            <label>Senha</label>
+            <input required type="password" name="password" data-ng-model="credentials.password">
+        </md-input-container>
+        <div ng-show="error" layout-margin class="md-warn">{{error}}</div>
+        <md-button class="md-accent md-raised">Entrar</md-button>
+    </form>
+</md-dialog>

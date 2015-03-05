@@ -5,7 +5,7 @@
         </md-toolbar>
         <md-content class="md-padding">
             <div ng-repeat="bt in menu" layout="column" layout-align="space-around start">
-                <md-button class="md-primary" data-ng-href="{{bt.link}}">{{bt.title}}</md-button>
+                <md-button class="md-primary" ng-show="isVisible(bt.role)" data-ng-href="{{bt.link}}">{{bt.title}}</md-button>
             </div>
         </md-content>
     </md-sidenav>

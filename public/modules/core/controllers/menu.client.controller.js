@@ -10,7 +10,14 @@ angular.module('core').controller('MenuController', ['$scope', 'Authentication',
             {link:'/instrumentos',title: 'Instrumentos', role: 'admin'},
             {link:'/aprenda', title: 'Aprenda a tocar',role: 'user'},
             {link:'/auth/signout', title: 'Sair', role: 'user'}
-        ]
+        ];
 
+        $scope.isVisible = function(role){
+            if ($scope.authentication.user){
+                return $scope.authentication.user.roles.indexOf(role) >= 0;
+            } else {
+                return false;
+            }
+        }
 	}
 ]);
