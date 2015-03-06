@@ -22,7 +22,9 @@ var fs = require('fs'),
 	flash = require('connect-flash'),
 	config = require('./config'),
 	consolidate = require('consolidate'),
-	path = require('path');
+	path = require('path'),
+    multer = require('multer');
+
 
 module.exports = function(db) {
 	// Initialize express app
@@ -56,6 +58,9 @@ module.exports = function(db) {
 		// zlib option for compression level
 		level: 3
 	}));
+
+    app.use('/uploads', express.static(__dirname + '/uploads'));
+    app.use(multer({dest: './uploads/'}))
 
 	// Showing stack errors
 	app.set('showStackError', true);

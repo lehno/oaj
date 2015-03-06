@@ -1,9 +1,11 @@
 <md-dialog aria-label="Login" layout-margin layout-padding>
-    <form data-ng-submit="create()" autocomplete="off" novalidate name="sheetForm"  layout="column"
+    <form data-ng-submit="save()" autocomplete="off" novalidate name="sheetForm"  layout="column"
           layout-align="center center">
         <md-input-container class="md-primary">
             <label>Nome da Música</label>
             <input required type="text" name="music" data-ng-model="sheet.name">
         </md-input-container>
+        <div class="md-accent" ng-file-select ng-model="file" accept=".pdf">Escolher arquivo</div>
+        <md-button class="md-primary md-raised">Salvar</md-button>
     </form>
 </md-dialog>

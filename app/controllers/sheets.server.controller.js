@@ -6,12 +6,31 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Sheet = mongoose.model('Sheet'),
-	_ = require('lodash');
+	_ = require('lodash'),
+    fs = require('fs-mock');
 
 /**
  * Create a Sheet
  */
 exports.create = function(req, res) {
+    var dirname = require('path').dirname(__dirname);
+    var filename = req.files.file.name;
+    var path = req.files.file.path;
+    var type = req.files.file.mimetype;
+
+    var read_stream =  fs.createReadStream(dirname + '/' + path);
+
+    var conn = req.conn;
+    var Grid = require('gridfs-stream');
+    Grid.mongo = mongoose.mongo;
+
+    var gfs = Grid(conn.db);
+
+    var writestream = gfs.createWriteStream({
+        filename: filename
+    });
+    read_stream.pipe(writestream);
+
 	var sheet = new Sheet(req.body);
 	sheet.user = req.user;
 
