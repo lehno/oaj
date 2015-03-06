@@ -6,8 +6,7 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Sheet = mongoose.model('Sheet'),
-	_ = require('lodash'),
-    fs = require('fs-mock');
+	_ = require('lodash');
 
 /**
  * Create a Sheet
