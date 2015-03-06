@@ -10,6 +10,7 @@ var _ = require('lodash'),
     User = mongoose.model('User'),
     Instrument = mongoose.model('Instrument');
 
+
 /**
  * Signup
  */

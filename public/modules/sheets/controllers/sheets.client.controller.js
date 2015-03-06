@@ -4,11 +4,11 @@
 angular.module('sheets').controller('SheetsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Sheets','Instruments','$mdDialog',
 	function($scope, $stateParams, $location, Authentication, Sheets,Instruments, $mdDialog) {
 		$scope.authentication = Authentication;
-        $scope.instrumentos = [];
+        $scope.instruments = [];
         $scope.selectedIndex = 2;
         // Find a list of Instrumentos
         $scope.findInstruments = function() {
-            $scope.instrumentos = Instruments.query();
+            $scope.instruments = Instruments.query();
         };
 
         $scope.newSheet = function (ev) {

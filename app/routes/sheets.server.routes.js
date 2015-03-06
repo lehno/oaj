@@ -1,4 +1,5 @@
 'use strict';
+var multer = require('multer');
 
 module.exports = function(app) {
 	var users = require('../../app/controllers/users.server.controller');

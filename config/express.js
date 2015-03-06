@@ -16,14 +16,14 @@ var fs = require('fs'),
 	cookieParser = require('cookie-parser'),
 	helmet = require('helmet'),
 	passport = require('passport'),
+    busboyBodyParser = require('busboy-body-parser'),
 	mongoStore = require('connect-mongo')({
 		session: session
 	}),
 	flash = require('connect-flash'),
 	config = require('./config'),
 	consolidate = require('consolidate'),
-	path = require('path'),
-    multer = require('multer');
+	path = require('path');
 
 
 module.exports = function(db) {
@@ -60,7 +60,6 @@ module.exports = function(db) {
 	}));
 
     app.use('/uploads', express.static(__dirname + '/uploads'));
-    app.use(multer({dest: './uploads/'}))
 
 	// Showing stack errors
 	app.set('showStackError', true);
@@ -88,7 +87,8 @@ module.exports = function(db) {
 		extended: true
 	}));
 	app.use(bodyParser.json());
-	app.use(methodOverride());
+    app.use(busboyBodyParser());
+    app.use(methodOverride());
 
 	// Use helmet to secure Express headers
 	app.use(helmet.xframe());

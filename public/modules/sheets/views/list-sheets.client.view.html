@@ -1,11 +1,11 @@
 <section data-ng-controller="SheetsController" class="sample" layout="column" data-ng-init="findInstruments()">
     <md-tabs class="md-primary" flex md-selected="selectedIndex">
-        <md-tab ng-repeat="instrumento in instrumentos" label="{{instrumento.name}}">
+        <md-tab ng-repeat="instrumento in instruments" label="{{instrumento.name}}">
             <div class="tab-content tab{{$index%4}}" layout="column" layout-align="space-around center" layout-margin
                  layout-padding>
                 <md-toolbar class="md-accent md-hue-3">
                     <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
-                        <span class="md-flex">Músicas para {{instrumentos[selectedIndex].name}}</span>
+                        <span class="md-flex">Músicas para {{instruments[selectedIndex].name}}</span>
                         <md-button class="md-primary md-raised" ng-click="newSheet()">Incluir Partitura
                         </md-button>
                     </div>
@@ -16,7 +16,7 @@
                         <input ng-model="query">
                     </md-input-container>
                     <md-list>
-                        <md-item ng-repeat="item in instrumentos | filter:query">
+                        <md-item ng-repeat="item in instruments | filter:query">
                             <md-item-content>
                                 <div class="md-tile-content">
                                     <h3>{{item.name}}</h3>

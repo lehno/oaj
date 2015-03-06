@@ -23,7 +23,12 @@ var SheetSchema = new Schema({
 	instrument: {
 		type: Schema.ObjectId,
 		ref: 'Instrument'
-	}
+	},
+    sheetFileId: {
+        type: String,
+        default: '',
+        required: 'Necessario informar o arquivo pdf',
+    }
 });
 
 mongoose.model('Sheet', SheetSchema);
