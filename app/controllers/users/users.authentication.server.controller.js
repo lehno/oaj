@@ -25,7 +25,7 @@ exports.signup = function (req, res) {
     // Add missing user fields
     user.provider = 'local';
     if (req.body.instrument) {
-        user.instrument = req.body.instrument._id;
+        user.Instrument = req.body.instrument._id;
         user.save(function (err) {
             if (err) {
                 return res.status(400).send({

@@ -1,8 +1,8 @@
 'use strict';
 
 // Sheets controller
-angular.module('sheets').controller('SheetsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Sheets','Instruments','$mdDialog',
-	function($scope, $stateParams, $location, Authentication, Sheets,Instruments, $mdDialog) {
+angular.module('sheets').controller('SheetsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Sheets','Instruments','$mdDialog','$rootScope',
+	function($scope, $stateParams, $location, Authentication, Sheets,Instruments, $mdDialog, $rootScope) {
 		$scope.authentication = Authentication;
         $scope.instruments = [];
         $scope.selectedIndex = 2;
@@ -12,6 +12,7 @@ angular.module('sheets').controller('SheetsController', ['$scope', '$stateParams
         };
 
         $scope.newSheet = function (ev) {
+            $rootScope.instrument = $scope.instruments[$scope.selectedIndex];
             $mdDialog.show({
                 controller: 'SheetUploadController',
                 templateUrl: 'modules/sheets/views/create-sheet.client.view.html',

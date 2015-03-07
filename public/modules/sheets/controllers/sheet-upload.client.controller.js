@@ -1,14 +1,14 @@
 'use strict';
 
-angular.module('sheets').controller('SheetUploadController', ['$scope', '$stateParams', '$location', 'Authentication', 'Sheets', '$mdDialog', '$upload',
-    function ($scope, $stateParams, $location, Authentication, Sheets, $mdDialog, $upload) {
+angular.module('sheets').controller('SheetUploadController', ['$scope', '$stateParams', '$location', 'Authentication', 'Sheets', '$mdDialog', '$upload','$rootScope',
+    function ($scope, $stateParams, $location, Authentication, Sheets, $mdDialog, $upload, $rootScope) {
         $scope.authentication = Authentication;
 
         $scope.save = function () {
             if ($scope.file) {
                 var sheet = new Sheets ({
                     name: $scope.sheet.name,
-                    instrument: $scope.instruments[$scope.selectedIndex]
+                    instrument: $rootScope.instrument
                 });
                 $upload.upload({
                     url: 'api/sheets',

@@ -27,7 +27,7 @@ var SheetSchema = new Schema({
     sheetFileId: {
         type: String,
         default: '',
-        required: 'Necessario informar o arquivo pdf',
+        required: 'Necessario informar o arquivo pdf'
     }
 });
 

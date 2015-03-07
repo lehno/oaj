@@ -30,7 +30,7 @@ exports.create = function(req, res) {
         var sheet = new Sheet();
         sheet.name = req.body.name;
         sheet.sheetFileId = file._id;
-        sheet.instrument = req.body.instrument._id;
+        sheet.Istrument = JSON.parse(req.body.instrument);
         sheet.save(function(err) {
             if (err) {
                 return res.status(400).send({

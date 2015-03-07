@@ -86,7 +86,7 @@ module.exports = function(db) {
 	app.use(bodyParser.urlencoded({
 		extended: true
 	}));
-	app.use(bodyParser.json());
+    app.use(bodyParser.json());
     app.use(busboyBodyParser());
     app.use(methodOverride());
 
