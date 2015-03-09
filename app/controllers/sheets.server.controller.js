@@ -30,7 +30,7 @@ exports.create = function(req, res) {
         var sheet = new Sheet();
         sheet.name = req.body.name;
         sheet.sheetFileId = file._id;
-        sheet.Istrument = JSON.parse(req.body.instrument);
+        sheet.istrument = mongoose.Types.ObjectId(JSON.parse(req.body.instrument)._id);
         sheet.save(function(err) {
             if (err) {
                 return res.status(400).send({
@@ -94,7 +94,7 @@ exports.delete = function(req, res) {
  * List of Sheets
  */
 exports.list = function(req, res) { 
-	Sheet.find().sort('-created').populate('user', 'displayName').exec(function(err, sheets) {
+	Sheet.find().sort('-name').populate('user', 'displayName').exec(function(err, sheets) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)

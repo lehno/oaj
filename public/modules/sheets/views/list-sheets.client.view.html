@@ -16,7 +16,7 @@
                         <input ng-model="query">
                     </md-input-container>
                     <md-list>
-                        <md-item ng-repeat="item in instruments | filter:query">
+                        <md-item ng-repeat="item in sheets | filter:query">
                             <md-item-content>
                                 <div class="md-tile-content">
                                     <h3>{{item.name}}</h3>

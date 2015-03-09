@@ -22,7 +22,7 @@ var db = mongoose.connect(config.db.uri, config.db.options, function (err) {
         Grid.mongo = mongoose.mongo;
         var conn = mongoose.createConnection(config.db.uri);
         conn.once('open', function () {
-            var gfs = Grid(conn.db);
+            var gfs = new Grid(conn.db);
             app.set('gridfs', gfs);
         });
     }

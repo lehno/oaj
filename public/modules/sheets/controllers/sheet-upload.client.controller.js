@@ -15,7 +15,7 @@ angular.module('sheets').controller('SheetUploadController', ['$scope', '$stateP
                     fields: sheet,
                     file: $scope.file[0]
                 }).success(function (data, status, headers, config) {
-                    console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+                    $mdDialog.hide();
                 });
             }
         };

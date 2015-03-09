@@ -11,7 +11,7 @@ module.exports = {
 	templateEngine: 'swig',
 	// The secret should be set to a non-guessable string that
 	// is used to compute a session hash
-	sessionSecret: 'MEAN',
+	sessionSecret: 'le_35724655',
 	// The name of the MongoDB collection to store sessions in
 	sessionCollection: 'sessions',
 	// The session cookie settings
@@ -25,7 +25,7 @@ module.exports = {
 		secure: false,
 		// Only set the maxAge to null if the cookie shouldn't be expired
 		// at all. The cookie will expunge when the browser is closed.
-		maxAge: null,
+		maxAge: null
 		// To set the cookie in a specific domain uncomment the following 
 		// setting:
 		// domain: 'yourdomain.com'
