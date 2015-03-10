@@ -73,7 +73,7 @@ exports.delete = function(req, res) {
  * List of Instruments
  */
 exports.list = function(req, res) { 
-	Instrument.find().sort('-name').populate('user', 'displayName').exec(function(err, instruments) {
+	Instrument.find().sort('name').populate('user', 'displayName').exec(function(err, instruments) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)

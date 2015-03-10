@@ -12,7 +12,7 @@ angular.module('sheets').controller('SheetsController', ['$scope', '$stateParams
             Instruments.query(function (result) {
                 $scope.instruments = result;
                 angular.forEach($scope.instruments, function (instrument, key) {
-                    if (instrument._id == $scope.authentication.user.instrument) {
+                    if (instrument._id === $scope.authentication.user.instrument) {
                         $scope.selectedIndex = key;
                         $scope.getSheets();
                     }
@@ -21,7 +21,7 @@ angular.module('sheets').controller('SheetsController', ['$scope', '$stateParams
         };
 
         $scope.$watch('selectedIndex', function (current, old) {
-            if (old && (old != current)) {
+            if (old && (old !== current)) {
                 $scope.getSheets();
             }
         });

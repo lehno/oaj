@@ -35,6 +35,7 @@ module.exports = function (db) {
         collection: config.sessionCollection
     },function(error) {
     });
+
     // Globbing model files
     config.getGlobbedFiles('./app/models/**/*.js').forEach(function (modelPath) {
         require(path.resolve(modelPath));
