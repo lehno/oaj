@@ -27,7 +27,7 @@ angular.module('sheets').controller('SheetsController', ['$scope', '$stateParams
         });
 
         $scope.getSheets = function(){
-            $scope.sheets = Sheets.query();
+            $scope.sheets = Sheets.query({'instrument': $scope.instruments[$scope.selectedIndex]._id});
         };
 
         $scope.newSheet = function (ev) {

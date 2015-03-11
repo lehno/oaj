@@ -4,10 +4,12 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-	errorHandler = require('./errors.server.controller'),
-	Sheet = mongoose.model('Sheet'),
-	_ = require('lodash'),
-    fs = require('fs');
+    errorHandler = require('./errors.server.controller'),
+    Sheet = mongoose.model('Sheet'),
+    _ = require('lodash'),
+    fs = require('fs'),
+    ObjectId = require('mongoose').Types.ObjectId;
+
 
 var Grid = require('gridfs-stream');
 Grid.mongo = mongoose.mongo;
@@ -16,7 +18,7 @@ var gfs = new Grid(mongoose.connection.db);
 /**
  * Create a Sheet
  */
-exports.create = function(req, res) {
+exports.create = function (req, res) {
 
     var part = req.files.file;
 
@@ -24,14 +26,14 @@ exports.create = function(req, res) {
         _id: mongoose.Types.ObjectId(),
         filename: part.name,
         mode: 'w',
-        content_type:part.mimetype
+        content_type: part.mimetype
     });
-    writeStream.on('close', function(file) {
+    writeStream.on('close', function (file) {
         var sheet = new Sheet();
         sheet.name = req.body.name;
-        sheet.istrument = JSON.parse(req.body.instrument)._id;
+        sheet._doc.istrument = mongoose.Types.ObjectId(req.body.instrument);
         sheet.sheetFileId = file._id;
-        sheet.save(function(err) {
+        sheet.save(function (err) {
             if (err) {
                 return res.status(400).send({
                     message: errorHandler.getErrorMessage(err)
@@ -50,79 +52,91 @@ exports.create = function(req, res) {
 /**
  * Show the current Sheet
  */
-exports.read = function(req, res) {
-	res.jsonp(req.sheet);
+exports.read = function (req, res) {
+    res.jsonp(req.sheet);
 };
 
 /**
  * Update a Sheet
  */
-exports.update = function(req, res) {
-	var sheet = req.sheet ;
+exports.update = function (req, res) {
+    var sheet = req.sheet;
 
-	sheet = _.extend(sheet , req.body);
+    sheet = _.extend(sheet, req.body);
 
-	sheet.save(function(err) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(sheet);
-		}
-	});
+    sheet.save(function (err) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.jsonp(sheet);
+        }
+    });
 };
 
 /**
  * Delete an Sheet
  */
-exports.delete = function(req, res) {
-	var sheet = req.sheet ;
+exports.delete = function (req, res) {
+    var sheet = req.sheet;
 
-	sheet.remove(function(err) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(sheet);
-		}
-	});
+    sheet.remove(function (err) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.jsonp(sheet);
+        }
+    });
 };
 
 /**
  * List of Sheets
  */
-exports.list = function(req, res) { 
-	Sheet.find().sort('name').populate('user', 'displayName').exec(function(err, sheets) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(sheets);
-		}
-	});
+exports.list = function (req, res) {
+    if (req.query.instrument) {
+        Sheet.find({instrument: new ObjectId(req.query.instrument)}).sort('name').populate('user', 'displayName').exec(function (err, sheets) {
+            if (err) {
+                return res.status(400).send({
+                    message: errorHandler.getErrorMessage(err)
+                });
+            } else {
+                res.jsonp(sheets);
+            }
+        });
+    } else {
+        Sheet.find().sort('name').populate('user', 'displayName').exec(function (err, sheets) {
+            if (err) {
+                return res.status(400).send({
+                    message: errorHandler.getErrorMessage(err)
+                });
+            } else {
+                res.jsonp(sheets);
+            }
+        });
+    }
 };
 
 /**
  * Sheet middleware
  */
-exports.sheetByID = function(req, res, next, id) { 
-	Sheet.findById(id).populate('user', 'displayName').exec(function(err, sheet) {
-		if (err) return next(err);
-		if (! sheet) return next(new Error('Failed to load Sheet ' + id));
-		req.sheet = sheet ;
-		next();
-	});
+exports.sheetByID = function (req, res, next, id) {
+    Sheet.findById(id).populate('user', 'displayName').exec(function (err, sheet) {
+        if (err) return next(err);
+        if (!sheet) return next(new Error('Failed to load Sheet ' + id));
+        req.sheet = sheet;
+        next();
+    });
 };
 
 /**
  * Sheet authorization middleware
  */
-exports.hasAuthorization = function(req, res, next) {
-	if (req.sheet.user.id !== req.user.id) {
-		return res.status(403).send('User is not authorized');
-	}
-	next();
+exports.hasAuthorization = function (req, res, next) {
+    if (req.sheet.user.id !== req.user.id) {
+        return res.status(403).send('User is not authorized');
+    }
+    next();
 };

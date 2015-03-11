@@ -8,7 +8,7 @@ angular.module('sheets').controller('SheetUploadController', ['$scope', '$stateP
             if ($scope.file) {
                 var sheet = new Sheets ({
                     name: $scope.sheet.name,
-                    instrument: $rootScope.instrument
+                    instrument: $rootScope.instrument._id
                 });
                 $upload.upload({
                     url: 'api/sheets',
