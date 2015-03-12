@@ -39,6 +39,7 @@ exports.create = function (req, res) {
                 mode: 'w',
                 content_type: files.file[1].headers[Object.keys(files.file[1].headers)[1]]
             });
+            fs.unlink(files.file[0].path);
             writeStream.on('close', function (musicFile) {
                 var sheet = new Sheet({
                     name: fields.name,
@@ -46,6 +47,7 @@ exports.create = function (req, res) {
                     sheetFileId: sheetFile._id,
                     musicFileId: musicFile._id
                 });
+                fs.unlink(files.file[1].path);
                 sheet.save(function (err) {
                     if (err) {
                         return res.status(400).send({

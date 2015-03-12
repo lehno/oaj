@@ -22,9 +22,7 @@
                                 <div class="md-tile-content">
                                     <h3>{{item.name}}</h3>
                                 </div>
-                                <a target="_self" data-ng-href="api/sheets/download?file={{item.musicFileId}}">
-                                    <md-button class="md-primary">Ouvir música</md-button>
-                                </a>
+                                <div audios code="item.musicFileId"></div>
                                 <a target="_self" data-ng-href="api/sheets/download?file={{item.sheetFileId}}">
                                     <md-button class="md-primary">Baixar partitura</md-button>
                                 </a>
