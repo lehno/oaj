@@ -21,13 +21,18 @@ var SheetSchema = new Schema({
 		default: Date.now
 	},
 	instrument: {
-		type: Schema.ObjectId,
+		type: String,
 		ref: 'Instrument'
 	},
     sheetFileId: {
         type: String,
         default: '',
         required: 'Necessario informar o arquivo pdf'
+    },
+    musicFileId: {
+        type: String,
+        default: '',
+        required: 'Necessario informar o arquivo de música'
     }
 });
 

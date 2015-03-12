@@ -11,6 +11,7 @@ angular.module('sheets').controller('SheetsController', ['$scope', '$stateParams
         $scope.findInstruments = function () {
             Instruments.query(function (result) {
                 $scope.instruments = result;
+                $scope.getSheets();
                 angular.forEach($scope.instruments, function (instrument, key) {
                     if (instrument._id === $scope.authentication.user.instrument) {
                         $scope.selectedIndex = key;
@@ -21,6 +22,7 @@ angular.module('sheets').controller('SheetsController', ['$scope', '$stateParams
         };
 
         $scope.$watch('selectedIndex', function (current, old) {
+            $scope.sheets = [];
             if (old && (old !== current)) {
                 $scope.getSheets();
             }
@@ -36,6 +38,9 @@ angular.module('sheets').controller('SheetsController', ['$scope', '$stateParams
                 controller: 'SheetUploadController',
                 templateUrl: 'modules/sheets/views/create-sheet.client.view.html',
                 targetEvent: ev
+            }).then(function() {
+                $scope.sheets = [];
+                $scope.getSheets();
             });
         };
         // Create new Sheet
@@ -95,5 +100,7 @@ angular.module('sheets').controller('SheetsController', ['$scope', '$stateParams
                 sheetId: $stateParams.sheetId
             });
         };
+
+        $scope.findInstruments();
     }
 ]);

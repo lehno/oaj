@@ -93,7 +93,6 @@ module.exports = function (db) {
         extended: true
     }));
     app.use(bodyParser.json());
-    app.use(busboyBodyParser());
     app.use(methodOverride());
 
     // Use helmet to secure Express headers

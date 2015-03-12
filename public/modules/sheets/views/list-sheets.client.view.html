@@ -1,4 +1,4 @@
-<section data-ng-controller="SheetsController" class="sample" layout="column" data-ng-init="findInstruments()">
+<section data-ng-controller="SheetsController" class="sample" layout="column">
     <md-tabs class="md-primary" flex md-selected="selectedIndex">
         <md-tab ng-repeat="instrumento in instruments" label="{{instrumento.name}}">
             <div class="tab-content tab{{$index%4}}" layout="column" layout-align="space-around center" layout-margin
@@ -6,7 +6,8 @@
                 <md-toolbar class="md-accent md-hue-3">
                     <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
                         <span class="md-flex">Músicas para {{instruments[selectedIndex].name}}</span>
-                        <md-button class="md-primary md-raised" ng-click="newSheet()">Incluir Partitura
+                        <md-button ng-show="authentication.user.roles.indexOf('admin') != -1"
+                                   class="md-primary md-raised" ng-click="newSheet()">Nova partitura
                         </md-button>
                     </div>
                 </md-toolbar>
@@ -17,14 +18,16 @@
                     </md-input-container>
                     <md-list>
                         <md-item ng-repeat="item in sheets | filter:query">
-                            <md-item-content>
+                            <md-item-content layout="row">
                                 <div class="md-tile-content">
                                     <h3>{{item.name}}</h3>
-                                    <h4>{{item.created}}</h4>
-                                    <p>
-                                        {{item.name}}
-                                    </p>
                                 </div>
+                                <a target="_self" data-ng-href="api/sheets/download?file={{item.musicFileId}}">
+                                    <md-button class="md-primary">Ouvir música</md-button>
+                                </a>
+                                <a target="_self" data-ng-href="api/sheets/download?file={{item.sheetFileId}}">
+                                    <md-button class="md-primary">Baixar partitura</md-button>
+                                </a>
                             </md-item-content>
                         </md-item>
                     </md-list>

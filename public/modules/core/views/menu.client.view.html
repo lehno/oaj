@@ -6,6 +6,9 @@
         <md-content class="md-padding">
             <div ng-repeat="bt in menu" layout="column" layout-align="space-around start">
                 <md-button class="md-primary" ng-show="isVisible(bt.role)" data-ng-href="{{bt.link}}">{{bt.title}}</md-button>
+                <a target="_self" data-ng-href="/auth/signout" ng-show="$last">
+                    <md-button class="md-primary">Sair</md-button>
+                </a>
             </div>
         </md-content>
     </md-sidenav>

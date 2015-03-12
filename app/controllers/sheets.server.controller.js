@@ -8,7 +8,8 @@ var mongoose = require('mongoose'),
     Sheet = mongoose.model('Sheet'),
     _ = require('lodash'),
     fs = require('fs'),
-    ObjectId = require('mongoose').Types.ObjectId;
+    multiparty = require('multiparty');
+
 
 
 var Grid = require('gridfs-stream');
@@ -19,34 +20,77 @@ var gfs = new Grid(mongoose.connection.db);
  * Create a Sheet
  */
 exports.create = function (req, res) {
-
-    var part = req.files.file;
-
-    var writeStream = gfs.createWriteStream({
-        _id: mongoose.Types.ObjectId(),
-        filename: part.name,
-        mode: 'w',
-        content_type: part.mimetype
+    var form = new multiparty.Form({
+        autoFiles: true,
+        uploadDir: './uploads'
     });
-    writeStream.on('close', function (file) {
-        var sheet = new Sheet();
-        sheet.name = req.body.name;
-        sheet._doc.istrument = mongoose.Types.ObjectId(req.body.instrument);
-        sheet.sheetFileId = file._id;
-        sheet.save(function (err) {
-            if (err) {
-                return res.status(400).send({
-                    message: errorHandler.getErrorMessage(err)
+    form.autoFiles = true;
+    form.parse(req, function(err, fields, files) {
+        var writeStream = gfs.createWriteStream({
+            _id: mongoose.Types.ObjectId(),
+            filename: files.file[0].originalFilename,
+            mode: 'w',
+            content_type: files.file[0].headers[Object.keys(files.file[0].headers)[1]]
+        });
+        writeStream.on('close', function (sheetFile) {
+            var writeStream = gfs.createWriteStream({
+                _id: mongoose.Types.ObjectId(),
+                filename: files.file[1].originalFilename,
+                mode: 'w',
+                content_type: files.file[1].headers[Object.keys(files.file[1].headers)[1]]
+            });
+            writeStream.on('close', function (musicFile) {
+                var sheet = new Sheet({
+                    name: fields.name,
+                    instrument: fields.instrument,
+                    sheetFileId: sheetFile._id,
+                    musicFileId: musicFile._id
                 });
-            } else {
-                return res.status(200).jsonp({
-                    message: 'Success'
+                sheet.save(function (err) {
+                    if (err) {
+                        return res.status(400).send({
+                            message: errorHandler.getErrorMessage(err)
+                        });
+                    } else {
+                        return res.status(200).jsonp({
+                            message: 'Success'
+                        });
+                    }
                 });
-            }
+            });
+            fs.createReadStream(files.file[1].path).pipe(writeStream);
+        });
+        fs.createReadStream(files.file[0].path).pipe(writeStream);
+    });
+};
+
+exports.getFile = function (req, res) {
+    gfs.files.find({_id: mongoose.Types.ObjectId(req.query.file)}).toArray(function (err, files) {
+        if (files.length === 0) {
+            return res.status(400).send({
+                message: 'File not found'
+            });
+        }
+
+        res.writeHead(200, {'Content-Type': files[0].contentType});
+
+        var readstream = gfs.createReadStream({
+            filename: files[0].filename
+        });
+
+        readstream.on('data', function (data) {
+            res.write(data);
+        });
+
+        readstream.on('end', function () {
+            res.end();
+        });
+
+        readstream.on('error', function (err) {
+            console.log('An error occurred!', err);
+            throw err;
         });
     });
-    writeStream.write(part.data);
-    writeStream.end();
 };
 
 /**
@@ -97,7 +141,7 @@ exports.delete = function (req, res) {
  */
 exports.list = function (req, res) {
     if (req.query.instrument) {
-        Sheet.find({instrument: new ObjectId(req.query.instrument)}).sort('name').populate('user', 'displayName').exec(function (err, sheets) {
+        Sheet.find({instrument: req.query.instrument}).sort('name').exec(function (err, sheets) {
             if (err) {
                 return res.status(400).send({
                     message: errorHandler.getErrorMessage(err)
@@ -107,7 +151,7 @@ exports.list = function (req, res) {
             }
         });
     } else {
-        Sheet.find().sort('name').populate('user', 'displayName').exec(function (err, sheets) {
+        Sheet.find().sort('name').exec(function (err, sheets) {
             if (err) {
                 return res.status(400).send({
                     message: errorHandler.getErrorMessage(err)

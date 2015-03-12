@@ -10,6 +10,9 @@ module.exports = function(app) {
 		.get(sheets.list)
 		.post(users.requiresLogin, sheets.create);
 
+    app.route('/api/sheets/download')
+        .get(sheets.getFile);
+
 	app.route('/api/sheets/:sheetId')
 		.get(sheets.read)
 		.put(users.requiresLogin, sheets.hasAuthorization, sheets.update)

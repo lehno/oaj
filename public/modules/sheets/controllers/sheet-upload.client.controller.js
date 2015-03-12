@@ -5,15 +5,16 @@ angular.module('sheets').controller('SheetUploadController', ['$scope', '$stateP
         $scope.authentication = Authentication;
 
         $scope.save = function () {
-            if ($scope.file) {
+            if ($scope.file && $scope.music) {
                 var sheet = new Sheets ({
                     name: $scope.sheet.name,
                     instrument: $rootScope.instrument._id
                 });
+                var files = [$scope.file[0], $scope.music[0]];
                 $upload.upload({
                     url: 'api/sheets',
                     fields: sheet,
-                    file: $scope.file[0]
+                    file: files
                 }).success(function (data, status, headers, config) {
                     $mdDialog.hide();
                 });
