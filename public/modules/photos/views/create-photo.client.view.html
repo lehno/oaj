@@ -1,0 +1,16 @@
+<md-dialog aria-label="Login" layout-margin layout-padding>
+    <h3>Inserir nova música</h3>
+    <form data-ng-submit="save()" autocomplete="off" novalidate name="photoForm" class="photo-form" layout="column"
+          layout-align="center center">
+        <md-input-container class="md-primary" layout-fill>
+            <label>Nome da foto</label>
+            <input required type="text" name="music" data-ng-model="photo.name">
+        </md-input-container>
+        <md-whiteframe layout="row" class="md-whiteframe-z1" layout-fill layout-align="start center" layout-padding>
+            <md-button class="md-accent md-raised" ng-file-select ng-model="file" accept="image/*">Escolher Foto</md-button>
+            <div layout-padding class="sheet-music">{{file[0].name}}</div>
+        </md-whiteframe>
+        <br/>
+        <md-button class="md-primary md-raised">Salvar</md-button>
+    </form>
+</md-dialog>

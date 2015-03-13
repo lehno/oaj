@@ -1,4 +1,4 @@
-<section data-ng-controller="SheetsController" class="sample" layout="column">
+<section data-ng-controller="SheetsController" layout="column" data-ng-init="getImages()">
     <md-tabs class="md-primary" flex md-selected="selectedIndex">
         <md-tab ng-repeat="instrumento in instruments" label="{{instrumento.name}}">
             <div class="tab-content tab{{$index%4}}" layout="column" layout-align="space-around center" layout-margin
@@ -23,7 +23,7 @@
                                     <h3>{{item.name}}</h3>
                                 </div>
                                 <div audios code="item.musicFileId"></div>
-                                <a target="_self" data-ng-href="api/sheets/download?file={{item.sheetFileId}}">
+                                <a target="_self" data-ng-href="api/download?file={{item.sheetFileId}}">
                                     <md-button class="md-primary">Baixar partitura</md-button>
                                 </a>
                             </md-item-content>

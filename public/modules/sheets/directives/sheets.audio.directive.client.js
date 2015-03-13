@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('sheets').directive('audios', function($sce) {
     return {
         restrict: 'A',
@@ -7,7 +9,7 @@ angular.module('sheets').directive('audios', function($sce) {
         link: function (scope) {
             scope.$watch('code', function (newVal, oldVal) {
                 if (newVal !== undefined) {
-                    scope.url = $sce.trustAsResourceUrl("api/sheets/download?file=" + newVal);
+                    scope.url = $sce.trustAsResourceUrl('api/download?file=' + newVal);
                 }
             });
         }

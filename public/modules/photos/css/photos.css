@@ -1,0 +1,12 @@
+.gridListdemoBasicUsage md-grid-list {
+    margin: 8px; }
+.gridListdemoBasicUsage md-grid-tile {
+    transition: all 400ms ease-out 50ms; }
+
+.floating {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin-right: 30px;
+    margin-bottom: 30px;
+}
