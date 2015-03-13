@@ -1,6 +1,6 @@
-.gridListdemoBasicUsage md-grid-list {
+.gridListPhoto md-grid-list {
     margin: 8px; }
-.gridListdemoBasicUsage md-grid-tile {
+.gridListPhoto md-grid-tile {
     transition: all 400ms ease-out 50ms; }
 
 .floating {

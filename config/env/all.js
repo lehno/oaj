@@ -2,11 +2,10 @@
 
 module.exports = {
 	app: {
-		title: 'MEAN.JS',
-		description: 'Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js',
-		keywords: 'mongodb, express, angularjs, node.js, mongoose, passport'
+		title: 'Orquestra Adventista de Joinville',
+		description: 'Para nossos músicos e qualquer outro',
+		keywords: 'piano,sax,trompete,violino,tuba,orquestra,adventista'
 	},
-    tmp: 'public/sheets',
 	port: process.env.PORT || 3000,
 	templateEngine: 'swig',
 	// The secret should be set to a non-guessable string that

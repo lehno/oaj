@@ -1,11 +1,9 @@
-<section data-ng-controller="PhotosController" data-ng-init="find()" layout="column">
+<section data-ng-controller="PhotosController" data-ng-init="find()" layout="column" layout-padding>
     <md-grid-list md-cols-sm="1" md-cols-md="2" md-cols-gt-md="6"
             md-row-height-gt-md="1:1" md-row-height="2:2"
-            md-gutter="12x" md-gutter-gt-sm="8px" class="gridListdemoBasicUsage">
-        <md-grid-tile
-                ng-style="{'background': 'url(http://localhost:3000/api/download/?file={{item.photoFileId}}) center no-repeat; background-size: cover'}"
+            md-gutter="12x" md-gutter-gt-sm="8px" class="gridListPhoto">
+        <md-grid-tile background-image-directive="{{item.photoFileId}}"
                 ng-repeat="item in photos">
-            <img ng-src="api/download/?file={{item.photoFileId}}" />
             <md-grid-tile-footer>
                 <h3>{{item.name}}</h3>
             </md-grid-tile-footer>
