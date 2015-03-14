@@ -31,8 +31,11 @@ exports.create = function (req, res) {
             content_type: files.file[0].headers[Object.keys(files.file[0].headers)[1]]
         });
         writeStream.on('close', function (musicFile) {
+            console.log(fields);
             var photo = new Photo({
                 name: fields.name[0],
+                featuredHor: fields.featuredHor,
+                featuredVer: fields.featuredVer,
                 photoFileId: musicFile._id
             });
             fs.unlink(files.file[0].path);

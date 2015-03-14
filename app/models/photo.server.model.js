@@ -24,6 +24,14 @@ var PhotoSchema = new Schema({
         type: String,
         default: '',
         required: 'Necessario informar o arquivo de imagem'
+    },
+    featuredHor: {
+        type: Boolean,
+        default: false
+    },
+    featuredVer: {
+        type: Boolean,
+        default: false
     }
 });
 

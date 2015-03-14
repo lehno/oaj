@@ -3,7 +3,7 @@
             md-row-height-gt-md="1:1" md-row-height="2:2"
             md-gutter="12x" md-gutter-gt-sm="8px" class="gridListPhoto">
         <md-grid-tile background-image-directive="{{item.photoFileId}}"
-                ng-repeat="item in photos">
+                ng-repeat="item in photos" md-rowspan="{{item.featuredVer === true ? 2 : 1}}" md-colspan="{{item.featuredHor === true ? 2 : 1}}">
             <md-grid-tile-footer>
                 <h3>{{item.name}}</h3>
             </md-grid-tile-footer>
