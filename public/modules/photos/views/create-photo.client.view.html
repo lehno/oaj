@@ -1,20 +1,22 @@
 <md-dialog aria-label="Login" layout-margin layout-padding>
-    <h3>Inserir nova música</h3>
-
+    <h3>Inserir Nova Foto</h3>
     <form data-ng-submit="save()" autocomplete="off" novalidate name="photoForm" class="photo-form" layout="column"
-          layout-align="center center">
+          layout-align="center start">
         <md-input-container class="md-primary" layout-fill>
             <label>Nome da foto</label>
             <input required type="text" name="music" data-ng-model="photo.name">
         </md-input-container>
+        <md-whiteframe layout="row" class="md-whiteframe-z1" layout-fill layout-align="start center" layout-padding>
+            <md-button class="md-accent md-raised" ng-file-select ng-model="file" accept="image/*">
+                <md-icon class="md-primary" md-svg-src="/modules/photos/img/upload.svg">Escolher arquivo</md-icon>
+            </md-button>
+            <div layout-padding class="sheet-music" ng-if="file[0].name">{{file[0].name}}</div>
+            <div layout-padding class="sheet-music" ng-if="!file[0].name">Nenhum arquivo</div>
+        </md-whiteframe>
         <md-checkbox ng-model="photo.featuredVer" aria-label="Destaque vertical">Destaque Vertical</md-checkbox>
         <md-checkbox ng-model="photo.featuredHor" aria-label="Destaque horizontal">Destaque Horizontal</md-checkbox>
-        <md-whiteframe layout="row" class="md-whiteframe-z1" layout-fill layout-align="start center" layout-padding>
-            <md-button class="md-accent md-raised" ng-file-select ng-model="file" accept="image/*">Escolher Foto
-            </md-button>
-            <div layout-padding class="sheet-music">{{file[0].name}}</div>
-        </md-whiteframe>
-        <br/>
-        <md-button class="md-primary md-raised">Salvar</md-button>
+        <md-content layout="row" layout-align="center center" layout-fill>
+            <md-button class="md-primary md-raised">Salvar</md-button>
+        </md-content>
     </form>
 </md-dialog>

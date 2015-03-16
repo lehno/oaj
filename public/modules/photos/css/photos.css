@@ -10,3 +10,11 @@
     margin-right: 30px;
     margin-bottom: 30px;
 }
+
+.floating-icon {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}

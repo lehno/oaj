@@ -1,7 +1,9 @@
 <section data-ng-controller="HeaderController">
     <md-toolbar scroll-shrink layout="row" ng-show="authentication.user">
         <div class="md-toolbar-tools">
-            <md-button class="md-accent md-raised" ng-click="toggleLeft()">Menu</md-button>
+            <md-button ng-click="toggleLeft()">
+                <md-icon class="md-accent" md-svg-src="/modules/core/img/menu.svg"></md-icon>
+            </md-button>
         </div>
     </md-toolbar>
     <section layout="row" layout-align="end center" layout-padding ng-show="!authentication.user">

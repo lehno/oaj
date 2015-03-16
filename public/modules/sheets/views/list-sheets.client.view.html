@@ -7,7 +7,8 @@
                     <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
                         <span class="md-flex">Músicas para {{instruments[selectedIndex].name}}</span>
                         <md-button ng-show="authentication.user.roles.indexOf('admin') != -1"
-                                   class="md-primary md-raised" ng-click="newSheet()">Nova partitura
+                                   ng-click="newSheet()">
+                            <md-icon class="md-primary" md-svg-src="/modules/sheets/img/new_sheet.svg"></md-icon>
                         </md-button>
                     </div>
                 </md-toolbar>

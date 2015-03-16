@@ -1,16 +1,19 @@
 <section data-ng-controller="PhotosController" data-ng-init="find()" layout="column" layout-padding>
     <md-grid-list md-cols-sm="1" md-cols-md="2" md-cols-gt-md="6"
-            md-row-height-gt-md="1:1" md-row-height="2:2"
-            md-gutter="12x" md-gutter-gt-sm="8px" class="gridListPhoto">
+                  md-row-height-gt-md="1:1" md-row-height="2:2"
+                  md-gutter="12x" md-gutter-gt-sm="8px" class="gridListPhoto">
         <md-grid-tile background-image-directive="{{item.photoFileId}}" ng-click="openPhoto($event, item)"
-                ng-repeat="item in photos" md-rowspan="{{item.featuredVer === true ? 2 : 1}}" md-colspan="{{item.featuredHor === true ? 2 : 1}}">
+                      ng-repeat="item in photos" md-rowspan="{{item.featuredVer === true ? 2 : 1}}"
+                      md-colspan="{{item.featuredHor === true ? 2 : 1}}">
             <md-grid-tile-footer>
                 <h3>{{item.name}}</h3>
-                <md-button class="md-primary md-raised" aria-label="Eat cake" ng-click="remove(item)">Remover
-                </md-button>
             </md-grid-tile-footer>
+            <md-button aria-label="Remove Photo" ng-click="remove(item)" class="floating-icon">
+                <md-icon class="md-accent" md-svg-src="/modules/photos/img/delete.svg"></md-icon>
+            </md-button>
         </md-grid-tile>
     </md-grid-list>
     <md-button class="md-fab floating" aria-label="Eat cake" ng-click="openPhotoUpload($event)">
+        <md-icon class="md-primary" md-svg-src="/modules/photos/img/upload_photo.svg"></md-icon>
     </md-button>
 </section>

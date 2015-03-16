@@ -1,5 +1,5 @@
 <md-dialog aria-label="Login" layout-margin layout-padding>
-    <h3>Inserir nova foto</h3>
+    <h3>Inserir Música</h3>
     <form data-ng-submit="save()" autocomplete="off" novalidate name="sheetForm" class="sheet-form" layout="column"
           layout-align="center center">
         <md-input-container class="md-primary" layout-fill>
@@ -7,13 +7,19 @@
             <input required type="text" name="music" data-ng-model="sheet.name">
         </md-input-container>
         <md-whiteframe layout="row" class="md-whiteframe-z1" layout-fill layout-align="start center" layout-padding>
-            <md-button class="md-accent md-raised" ng-file-select ng-model="file" accept=".pdf">Escolher pdf</md-button>
-            <div layout-padding class="sheet-pdf">{{file[0].name}}</div>
+            <md-button class="md-accent md-raised" ng-file-select ng-model="file" accept=".pdf">
+                <md-icon class="md-primary" md-svg-src="/modules/sheets/img/pdf.svg"></md-icon>
+            </md-button>
+            <div layout-padding class="sheet-music" ng-if="file[0].name">{{file[0].name}}</div>
+            <div layout-padding class="sheet-music" ng-if="!file[0].name">Nenhum arquivo</div>
         </md-whiteframe>
         <br/>
         <md-whiteframe layout="row" class="md-whiteframe-z1" layout-fill layout-align="start center" layout-padding>
-            <md-button class="md-accent md-raised" ng-file-select ng-model="music" accept=".mp3">Escolher MP3</md-button>
-            <div layout-padding class="sheet-music">{{music[0].name}}</div>
+            <md-button class="md-accent md-raised" ng-file-select ng-model="music" accept=".mp3">
+                <md-icon class="md-primary" md-svg-src="/modules/sheets/img/mp3.svg"></md-icon>
+            </md-button>
+            <div layout-padding class="sheet-music" ng-if="music[0].name">{{music[0].name}}</div>
+            <div layout-padding class="sheet-music" ng-if="!music[0].name">Nenhum arquivo</div>
         </md-whiteframe>
         <br/>
         <md-button class="md-primary md-raised">Salvar</md-button>
