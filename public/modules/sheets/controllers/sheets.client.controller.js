@@ -43,23 +43,6 @@ angular.module('sheets').controller('SheetsController', ['$scope', '$stateParams
                 $scope.getSheets();
             });
         };
-        // Create new Sheet
-        $scope.create = function () {
-            // Create new Sheet object
-            var sheet = new Sheets({
-                name: this.name
-            });
-
-            // Redirect after save
-            sheet.$save(function (response) {
-                $location.path('sheets/' + response._id);
-
-                // Clear form fields
-                $scope.name = '';
-            }, function (errorResponse) {
-                $scope.error = errorResponse.data.message;
-            });
-        };
 
         // Remove existing Sheet
         $scope.remove = function (sheet) {
@@ -92,13 +75,6 @@ angular.module('sheets').controller('SheetsController', ['$scope', '$stateParams
         // Find a list of Sheets
         $scope.find = function () {
             $scope.sheets = Sheets.query();
-        };
-
-        // Find existing Sheet
-        $scope.findOne = function () {
-            $scope.sheet = Sheets.get({
-                sheetId: $stateParams.sheetId
-            });
         };
 
         $scope.findInstruments();

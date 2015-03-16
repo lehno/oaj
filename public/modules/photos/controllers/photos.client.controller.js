@@ -1,8 +1,8 @@
 'use strict';
 
 // Photos controller
-angular.module('photos').controller('PhotosController', ['$scope', '$stateParams', '$location', 'Authentication', 'Photos', '$mdDialog',
-    function ($scope, $stateParams, $location, Authentication, Photos, $mdDialog) {
+angular.module('photos').controller('PhotosController', ['$scope', '$stateParams', '$location', 'Authentication', 'Photos', '$mdDialog','$rootScope',
+    function ($scope, $stateParams, $location, Authentication, Photos, $mdDialog, $rootScope) {
         $scope.authentication = Authentication;
 
         $scope.openPhotoUpload = function (ev) {
@@ -12,6 +12,15 @@ angular.module('photos').controller('PhotosController', ['$scope', '$stateParams
                 targetEvent: ev
             }).then(function () {
                 $scope.getImages();
+            });
+        };
+
+        $scope.openPhoto = function (ev,photo) {
+            $rootScope.photo = photo;
+            $mdDialog.show({
+                controller: 'ViewPhotoController',
+                templateUrl: 'modules/photos/views/view-photo.client.view.html',
+                targetEvent: ev
             });
         };
 

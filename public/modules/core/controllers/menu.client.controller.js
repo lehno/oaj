@@ -5,7 +5,9 @@ angular.module('core').controller('MenuController', ['$scope', 'Authentication',
         $scope.authentication = Authentication;
         $scope.menu = [
             {link: '/fotos', title: 'Fotos', role: 'user'},
+/*
             {link: '/videos', title: 'Videos', role: 'user'},
+*/
             {link: '/partituras', title: 'Partituras', role: 'user'},
             {link: '/instrumentos', title: 'Instrumentos', role: 'admin'}
         ];

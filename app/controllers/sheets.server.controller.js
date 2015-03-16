@@ -44,7 +44,8 @@ exports.create = function (req, res) {
                     name: fields.name,
                     instrument: fields.instrument,
                     sheetFileId: sheetFile._id,
-                    musicFileId: musicFile._id
+                    musicFileId: musicFile._id,
+                    user: req.user
                 });
                 fs.unlink(files.file[1].path);
                 sheet.save(function (err) {
@@ -141,7 +142,7 @@ exports.list = function (req, res) {
  * Sheet middleware
  */
 exports.sheetByID = function (req, res, next, id) {
-    Sheet.findById(id).populate('user', 'displayName').exec(function (err, sheet) {
+    Sheet.findById(id).exec(function (err, sheet) {
         if (err) return next(err);
         if (!sheet) return next(new Error('Failed to load Sheet ' + id));
         req.sheet = sheet;
@@ -153,7 +154,7 @@ exports.sheetByID = function (req, res, next, id) {
  * Sheet authorization middleware
  */
 exports.hasAuthorization = function (req, res, next) {
-    if (req.sheet.user.id !== req.user.id) {
+    if (req.sheet.user.toString() !== req.user.id) {
         return res.status(403).send('User is not authorized');
     }
     next();

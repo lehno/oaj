@@ -33,6 +33,10 @@ var SheetSchema = new Schema({
         type: String,
         default: '',
         required: 'Necessario informar o arquivo de música'
+    },
+    user : {
+        type: Schema.ObjectId,
+        ref: 'User'
     }
 });
 

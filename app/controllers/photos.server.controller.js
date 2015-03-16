@@ -31,12 +31,12 @@ exports.create = function (req, res) {
             content_type: files.file[0].headers[Object.keys(files.file[0].headers)[1]]
         });
         writeStream.on('close', function (musicFile) {
-            console.log(fields);
             var photo = new Photo({
                 name: fields.name[0],
                 featuredHor: fields.featuredHor,
                 featuredVer: fields.featuredVer,
-                photoFileId: musicFile._id
+                photoFileId: musicFile._id,
+                user: req.user
             });
             fs.unlink(files.file[0].path);
             photo.save(function (err) {
@@ -115,7 +115,7 @@ exports.list = function (req, res) {
  * Photo middleware
  */
 exports.photoByID = function (req, res, next, id) {
-    Photo.findById(id).populate('user', 'displayName').exec(function (err, photo) {
+    Photo.findById(id).exec(function (err, photo) {
         if (err) return next(err);
         if (!photo) return next(new Error('Failed to load Photo ' + id));
         req.photo = photo;
@@ -127,7 +127,7 @@ exports.photoByID = function (req, res, next, id) {
  * Photo authorization middleware
  */
 exports.hasAuthorization = function (req, res, next) {
-    if (req.photo.user.id !== req.user.id) {
+    if (req.photo.user.toString() !== req.user.id) {
         return res.status(403).send('User is not authorized');
     }
     next();
