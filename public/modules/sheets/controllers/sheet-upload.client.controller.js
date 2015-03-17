@@ -4,7 +4,7 @@ angular.module('sheets').controller('SheetUploadController', ['$scope', '$stateP
     function ($scope, $stateParams, $location, Authentication, Sheets, $mdDialog, $upload, $rootScope) {
         $scope.authentication = Authentication;
         $scope.saving = false;
-        $scope.error;
+        $scope.error = undefined;
 
         $scope.save = function () {
             if ($scope.file && $scope.music) {
@@ -22,7 +22,7 @@ angular.module('sheets').controller('SheetUploadController', ['$scope', '$stateP
                     $mdDialog.hide();
                 });
             } else {
-                $scope.error = "Preencha todos os campos";
+                $scope.error = 'Preencha todos os campos';
             }
         };
     }

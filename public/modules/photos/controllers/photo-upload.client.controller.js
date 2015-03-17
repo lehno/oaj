@@ -6,7 +6,7 @@ angular.module('sheets').controller('PhotoUploadController', ['$scope', '$stateP
         $scope.featuredHor = false;
         $scope.featuredVer = false;
         $scope.saving = false;
-        $scope.error;
+        $scope.error = undefined;
 
         $scope.save = function () {
             if ($scope.file && $scope.photo.name) {
@@ -24,7 +24,7 @@ angular.module('sheets').controller('PhotoUploadController', ['$scope', '$stateP
                     $mdDialog.hide();
                 });
             } else {
-                $scope.error = "Preencha todos os campos"
+                $scope.error = 'Preencha todos os campos';
             }
         };
     }
