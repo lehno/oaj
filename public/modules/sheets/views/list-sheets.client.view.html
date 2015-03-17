@@ -7,8 +7,11 @@
                     <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
                         <span class="md-flex">Músicas para {{instruments[selectedIndex].name}}</span>
                         <md-button ng-show="authentication.user.roles.indexOf('admin') != -1"
-                                   ng-click="newSheet()">
-                            <md-icon class="md-primary" md-svg-src="/modules/sheets/img/new_sheet.svg"></md-icon>
+                                   ng-click="newSheet()" style="font-size: 20px">
+                            <md-tooltip md-direction="left">
+                                Inserir música para {{instruments[selectedIndex].name}}
+                            </md-tooltip>
+                            <md-icon class="md-primary" style="font-size: 20px" md-svg-src="/modules/sheets/img/plus.svg"></md-icon>
                         </md-button>
                     </div>
                 </md-toolbar>
@@ -25,11 +28,14 @@
                                 </div>
                                 <a target="_self" data-ng-href="api/download?file={{item.sheetFileId}}">
                                     <md-button class="md-primary">
+                                        <md-tooltip md-direction="left">
+                                            Baixar partitura
+                                        </md-tooltip>
                                         <md-icon class="md-primary" md-svg-src="/modules/sheets/img/download.svg"></md-icon>
                                     </md-button>
                                 </a>
-                                <md-button ng-show="authentication.user.roles.indexOf('admin') != -1" class="md-primary" ng-click="remove(item)">
-                                    <md-icon class="md-primary" md-svg-src="/modules/photos/img/delete.svg"></md-icon>
+                                <md-button ng-show="authentication.user.roles.indexOf('admin') != -1" style="color: #A5A5A5" ng-click="remove(item)">
+                                    <md-icon md-svg-src="/modules/photos/img/delete.svg"></md-icon>
                                 </md-button>
                                 <div audios code="item.musicFileId"></div>
                             </md-item-content>
