@@ -3,9 +3,12 @@
 angular.module('sheets').controller('SheetUploadController', ['$scope', '$stateParams', '$location', 'Authentication', 'Sheets', '$mdDialog', '$upload','$rootScope',
     function ($scope, $stateParams, $location, Authentication, Sheets, $mdDialog, $upload, $rootScope) {
         $scope.authentication = Authentication;
+        $scope.saving = false;
+        $scope.error;
 
         $scope.save = function () {
             if ($scope.file && $scope.music) {
+                $scope.saving = true;
                 var sheet = new Sheets ({
                     name: $scope.sheet.name,
                     instrument: $rootScope.instrument._id
@@ -18,6 +21,8 @@ angular.module('sheets').controller('SheetUploadController', ['$scope', '$stateP
                 }).success(function (data, status, headers, config) {
                     $mdDialog.hide();
                 });
+            } else {
+                $scope.error = "Preencha todos os campos";
             }
         };
     }

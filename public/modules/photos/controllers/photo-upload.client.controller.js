@@ -5,9 +5,12 @@ angular.module('sheets').controller('PhotoUploadController', ['$scope', '$stateP
         $scope.authentication = Authentication;
         $scope.featuredHor = false;
         $scope.featuredVer = false;
+        $scope.saving = false;
+        $scope.error;
 
         $scope.save = function () {
-            if ($scope.file) {
+            if ($scope.file && $scope.photo.name) {
+                $scope.saving = true;
                 var photo = new Photos ({
                     name: $scope.photo.name,
                     featuredHor: $scope.photo.featuredHor,
@@ -20,6 +23,8 @@ angular.module('sheets').controller('PhotoUploadController', ['$scope', '$stateP
                 }).success(function (data, status, headers, config) {
                     $mdDialog.hide();
                 });
+            } else {
+                $scope.error = "Preencha todos os campos"
             }
         };
     }

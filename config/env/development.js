@@ -17,9 +17,11 @@ module.exports = {
 			//stream: 'access.log'
 		}
 	},
-	app: {
-		title: 'OAJ - Development Environment'
-	},
+    app: {
+        title: 'Orquestra Adventista de Joinville',
+        description: 'Para nossos músicos e qualquer outro',
+        keywords: 'piano,sax,trompete,violino,tuba,orquestra,adventista'
+    },
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || 'APP_ID',
 		clientSecret: process.env.FACEBOOK_SECRET || 'APP_SECRET',

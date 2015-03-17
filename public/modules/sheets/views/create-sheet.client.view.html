@@ -22,6 +22,8 @@
             <div layout-padding class="sheet-music" ng-if="!music[0].name">Nenhum arquivo</div>
         </md-whiteframe>
         <br/>
-        <md-button class="md-primary md-raised">Salvar</md-button>
+        <div ng-show="error">{{error}}</div>
+        <md-progress-circular md-mode="indeterminate" ng-show="saving"></md-progress-circular>
+        <md-button class="md-primary md-raised" ng-hide="saving">Salvar</md-button>
     </form>
 </md-dialog>

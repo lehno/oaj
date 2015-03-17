@@ -15,8 +15,10 @@
         </md-whiteframe>
         <md-checkbox ng-model="photo.featuredVer" aria-label="Destaque vertical">Destaque Vertical</md-checkbox>
         <md-checkbox ng-model="photo.featuredHor" aria-label="Destaque horizontal">Destaque Horizontal</md-checkbox>
+        <div ng-show="error">{{error}}</div>
         <md-content layout="row" layout-align="center center" layout-fill>
-            <md-button class="md-primary md-raised">Salvar</md-button>
+            <md-button class="md-primary md-raised" ng-hide="saving">Salvar</md-button>
+            <md-progress-circular md-mode="indeterminate" ng-show="saving"></md-progress-circular>
         </md-content>
     </form>
 </md-dialog>

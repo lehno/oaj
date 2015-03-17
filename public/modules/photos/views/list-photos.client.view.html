@@ -9,11 +9,17 @@
                 <h3>{{item.name}}</h3>
             </md-grid-tile-footer>
             <md-button ng-show="authentication.user.roles.indexOf('admin') != -1" aria-label="Remove Photo" ng-click="remove(item)" class="floating-icon">
+                <md-tooltip md-direction="top">
+                    Remover foto
+                </md-tooltip>
                 <md-icon class="md-accent" md-svg-src="/modules/photos/img/delete.svg"></md-icon>
             </md-button>
         </md-grid-tile>
     </md-grid-list>
     <md-button ng-show="authentication.user.roles.indexOf('admin') != -1" class="md-fab floating" aria-label="Eat cake" ng-click="openPhotoUpload($event)">
+        <md-tooltip md-direction="top">
+            Inserir nova foto
+        </md-tooltip>
         <md-icon class="md-primary" md-svg-src="/modules/photos/img/upload_photo.svg"></md-icon>
     </md-button>
 </section>
