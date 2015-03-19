@@ -1,8 +1,8 @@
 'use strict';
 
 // Sheets controller
-angular.module('sheets').controller('SheetsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Sheets', 'Instruments', '$mdDialog', '$rootScope',
-    function ($scope, $stateParams, $location, Authentication, Sheets, Instruments, $mdDialog, $rootScope) {
+angular.module('sheets').controller('SheetsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Sheets', 'Instruments', '$mdDialog', '$rootScope','$mdToast',
+    function ($scope, $stateParams, $location, Authentication, Sheets, Instruments, $mdDialog, $rootScope,$mdToast) {
         $scope.authentication = Authentication;
         $scope.instruments = [];
         $scope.sheets = [];
@@ -54,6 +54,12 @@ angular.module('sheets').controller('SheetsController', ['$scope', '$stateParams
                         $scope.sheets.splice(i, 1);
                     }
                 }
+                $mdToast.show(
+                    $mdToast.simple()
+                        .content('Removido com sucesso')
+                        .position('top right')
+                        .hideDelay(3000)
+                );
             } else {
                 $scope.sheet.$remove(function () {
                     $location.path('sheets');

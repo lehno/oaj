@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('sheets').controller('PhotoUploadController', ['$scope', '$stateParams', '$location', 'Authentication', 'Photos', '$mdDialog', '$upload',
-    function ($scope, $stateParams, $location, Authentication, Photos, $mdDialog, $upload) {
+angular.module('sheets').controller('PhotoUploadController', ['$scope', '$stateParams', '$location', 'Authentication', 'Photos', '$mdDialog', '$upload','$mdToast',
+    function ($scope, $stateParams, $location, Authentication, Photos, $mdDialog, $upload,$mdToast) {
         $scope.authentication = Authentication;
         $scope.featuredHor = false;
         $scope.featuredVer = false;
@@ -22,6 +22,12 @@ angular.module('sheets').controller('PhotoUploadController', ['$scope', '$stateP
                     file: $scope.file
                 }).success(function (data, status, headers, config) {
                     $mdDialog.hide();
+                    $mdToast.show(
+                        $mdToast.simple()
+                            .content('Adicionado com sucesso!')
+                            .position('top right')
+                            .hideDelay(3000)
+                    );
                 });
             } else {
                 $scope.error = 'Preencha todos os campos';

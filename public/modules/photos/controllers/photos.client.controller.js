@@ -1,8 +1,8 @@
 'use strict';
 
 // Photos controller
-angular.module('photos').controller('PhotosController', ['$scope', '$stateParams', '$location', 'Authentication', 'Photos', '$mdDialog','$rootScope',
-    function ($scope, $stateParams, $location, Authentication, Photos, $mdDialog, $rootScope) {
+angular.module('photos').controller('PhotosController', ['$scope', '$stateParams', '$location', 'Authentication', 'Photos', '$mdDialog','$rootScope','$mdToast',
+    function ($scope, $stateParams, $location, Authentication, Photos, $mdDialog, $rootScope,$mdToast) {
         $scope.authentication = Authentication;
 
         $scope.openPhotoUpload = function (ev) {
@@ -38,6 +38,12 @@ angular.module('photos').controller('PhotosController', ['$scope', '$stateParams
                         $scope.photos.splice(i, 1);
                     }
                 }
+                $mdToast.show(
+                    $mdToast.simple()
+                        .content('Removido com sucesso!')
+                        .position('top right')
+                        .hideDelay(3000)
+                );
             } else {
                 $scope.photo.$remove(function () {
                     $location.path('photos');
